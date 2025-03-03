@@ -17,6 +17,7 @@ userRouter.post('/signup', async (c) => {
     }).$extends(withAccelerate())
 
     const body = await c.req.json();
+    console.log(body)
     const result = signupInput.safeParse(body)
     // console.log(result)
 
@@ -30,8 +31,9 @@ userRouter.post('/signup', async (c) => {
     try {
         const user = await prisma.user.create({
             data: {
-                email: body.email,
+                username: body.username,
                 password: body.password,
+                name: body.name
             }
         })
 
@@ -44,7 +46,7 @@ userRouter.post('/signup', async (c) => {
         console.log(e)
         c.status(500)
         return c.json({
-        msg: "cannot creater user. try again later.",
+            msg: "cannot creater user. try again later.",
         })
     }
 })
@@ -66,7 +68,7 @@ userRouter.post('/signin', async (c) => {
     try {
         const user = await prisma.user.findFirst({
             where: {
-                email: body.email,
+                username: body.username,
                 password: body.password
             }
         })
