@@ -8,10 +8,8 @@ export const Blog = () => {
         id: id || ""
     });
 
-    if(loading) {
-        return <div>
-            loading...
-        </div>
+    if (loading) {
+        return <div className="flex items-center justify-center min-h-screen text-lg">Loading...</div>;
     }
 
     if(!blog) {
