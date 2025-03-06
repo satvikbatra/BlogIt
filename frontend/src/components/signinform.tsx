@@ -15,6 +15,7 @@ export const SigninForm = () => {
 
     async function sendRequest() {
         try {
+            console.log(BACKEND_URL)
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInput);
             const jwt = response.data.jwt;
             localStorage.setItem("token", jwt);
